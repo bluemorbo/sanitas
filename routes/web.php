@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BloodPressureController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +23,11 @@ Route::get('/about', function () {
    return view('about');
 })->name('about');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::prefix('/blood-pressure')->group(function() {
+        Route::get('', [BloodPressureController::class, 'index'])->name('blood-pressure.index');
+        Route::get('/add', [BloodPressureController::class, 'create'])->name('blood-pressure.create');
+    });
+});
