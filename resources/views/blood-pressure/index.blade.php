@@ -9,7 +9,7 @@
     @if($readings->count() > 0)
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-6 text-right">
-                <a href="{{ route('blood-pressure.create') }}" class="block text-center mx-2 md:m-none md:inline md:inline-flex md:items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                <a href="{{ route('blood-pressure.create') }}" class="block text-center mx-2 md:mx-0 md:inline md:inline-flex md:items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                     Add a reading
                 </a>
             </div>
