@@ -164,6 +164,12 @@
         </div>
     </div>
 
+    <div class="py-4 bg-chelsea-cucumber-700">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-chelsea-cucumber-100 text-sm">
+            <p>Sanitas, the health tracking app. Copyright {{ date('Y') }}</p>
+        </div>
+    </div>
+
 
 
 
