@@ -48,6 +48,9 @@
                                     </p>
                                 </div>
                             </div>
+                            <div class="mt-6">
+                                <a href="{{ route('blood-pressure.advice') }}" class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-chelsea-cucumber-500 hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out text-chelsea-cucumber-600 hover:text-chelsea-cucumber-900 transition duration-150 ease-in-out">What do these numbers mean?</a>
+                            </div>
                         </div>
                         <div class="w-full md:w-1/2">
                             <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
