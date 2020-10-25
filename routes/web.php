@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BloodPressureController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,5 +35,21 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
         Route::get('/advice', function() {
             return view('blood-pressure.advice');
         })->name('blood-pressure.advice');
+
+        Route::get('/export-pdf', function () {
+            $snappy = App::make('snappy.pdf');
+
+            $readings = \App\Models\BloodPressure::orderBy('reading_date')->get();
+            $html = view('pdfs.blood-pressure-diary', compact('readings'));
+
+            return new Response(
+                $snappy->getOutputFromHtml($html),
+                200,
+                array(
+                    'Content-Type'          => 'application/pdf',
+                    'Content-Disposition'   => 'attachment; filename="blood-pressure.pdf"'
+                )
+            );
+        })->name('export-pdf');
     });
 });
