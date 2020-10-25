@@ -6,13 +6,26 @@
     </x-slot>
 
     <div class="py-12">
-        @if(Session::has('success'))
+        @if(Session::has('successMessage'))
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-chelsea-cucumber-400 rounded-lg text-chelsea-cucumber-900 px-4 py-3 mb-4" role="alert">
                 <div class="flex">
                     <div>
-                        <p class="font-bold">Blood pressure reading saved</p>
-                        <p class="text-sm">If you feel the reading is abnormal, wait 5 minutes and take 2 more readings.</p>
+                        <p class="font-bold">{{ Session::get('successMessage')['title'] }}</p>
+                        <p class="text-sm">{{ Session::get('successMessage')['body'] }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        @if(Session::has('errorMessage'))
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-crusta-400 rounded-lg text-crusta-900 px-4 py-3 mb-4" role="alert">
+                <div class="flex">
+                    <div>
+                        <p class="font-bold">{{ Session::get('errorMessage')['title'] }}</p>
+                        <p class="text-sm">{{ Session::get('errorMessage')['body'] }}</p>
                     </div>
                 </div>
             </div>
@@ -84,7 +97,11 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                        {{--<a href="#" class="text-chelsea-cucumber-600 hover:text-chelsea-cucumber-900">Edit</a>--}}
+                                        <form action="{{ route('blood-pressure.delete', ['id' => $reading->id ]) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" class="bg-transparent cursor-pointer text-crusta-600 hover:text-crusta-900" value="Delete">
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
         Route::get('', [BloodPressureController::class, 'index'])->name('blood-pressure.index');
         Route::get('/add', [BloodPressureController::class, 'create'])->name('blood-pressure.create');
         Route::post('/add', [BloodPressureController::class, 'store'])->name('blood-pressure.store');
+        Route::delete('/{id}', [BloodPressureController::class, 'destroy'])->name('blood-pressure.delete');
         Route::get('/advice', function() {
             return view('blood-pressure.advice');
         })->name('blood-pressure.advice');

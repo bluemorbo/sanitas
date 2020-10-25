@@ -44,7 +44,40 @@ class BloodPressureController extends Controller
             'reading_date' => (new Carbon())->format('Y-m-d H:i:s')
         ]);
 
-        $request->session()->flash('success', true);
+        $request->session()->flash('successMessage', [
+            'title' => 'Blood pressure reading saved',
+            'body' => 'If you feel the reading is abnormal, wait at least one minute and take 2 further readings.'
+        ]);
+
+        return redirect()->route('blood-pressure.index');
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $reading = BloodPressure::find($id);
+
+        if (!$reading) {
+            $request->session()->flash('errorMessage', [
+                'title' => 'Unknown reading',
+                'body' => "We don't recognise that one, try again maybe?"
+            ]);
+
+            return redirect()->back();
+        }
+
+        if (!$reading->delete()) {
+            $request->session()->flash('errorMessage', [
+                'title' => 'Whoops, something went wrong there!',
+                'body' => "I'd try again later."
+            ]);
+
+            return redirect()->back();
+        }
+
+        $request->session()->flash('successMessage', [
+            'title' => 'Blood pressure reading deleted',
+            'body' => "Poof! It's gone."
+        ]);
 
         return redirect()->route('blood-pressure.index');
     }
