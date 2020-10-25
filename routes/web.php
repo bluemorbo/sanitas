@@ -50,6 +50,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
                     'Content-Disposition'   => 'attachment; filename="blood-pressure.pdf"'
                 )
             );
-        })->name('export-pdf');
+        })->name('blood-pressure.export-pdf');
     });
 });

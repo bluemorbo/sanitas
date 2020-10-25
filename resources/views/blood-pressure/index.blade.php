@@ -39,6 +39,10 @@
                     Blood Pressure Categories
                 </a>
 
+                <a href="{{ route('blood-pressure.export-pdf') }}" class="block text-center mx-2 md:mx-0 md:inline md:inline-flex md:items-center px-4 py-2 bg-tree-poppy-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-tree-poppy-700 active:bg-tree-poppy-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                    Export to PDF
+                </a>
+
                 <a href="{{ route('blood-pressure.create') }}" class="block text-center mx-2 md:mx-0 md:inline md:inline-flex md:items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                     Add a reading
                 </a>
