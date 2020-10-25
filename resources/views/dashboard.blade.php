@@ -18,39 +18,82 @@
                 </div>
 
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pb-6">
-                    <div>
-                        <div class="flex w-full sm:max-w-sm mt-6 px-6 py-4 bg-white shadow overflow-hidden sm:rounded-lg">
-                            <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-tree-poppy-500 text-white">
-                                    <i class="fas fa-heartbeat text-2xl"></i>
+                    <div class="md:flex">
+                        <div class="w-full md:w-1/2 flex content-center flex-wrap ">
+                            <div class="flex w-full sm:max-w-sm px-6 py-4 bg-white shadow overflow-hidden sm:rounded-lg">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-tree-poppy-500 text-white">
+                                        <i class="fas fa-heartbeat text-2xl"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Average Blood Pressure</h4>
+                                    <p class="mt-2 text-3xl leading-6 text-lynch-700">
+                                        {{ number_format($averageReading->systolic, 0) }} /
+                                        {{ number_format($averageReading->diastolic, 0) }}
+                                    </p>
                                 </div>
                             </div>
-                            <div class="ml-4">
-                                <h4 class="bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Average Blood Pressure</h4>
-                                <p class="mt-2 text-3xl leading-6 text-lynch-700">
-                                    {{ number_format($averageReading->systolic, 0) }} /
-                                    {{ number_format($averageReading->diastolic, 0) }}
-                                </p>
+
+                            <div class="flex w-full sm:max-w-sm mt-6 px-6 py-4 bg-white shadow overflow-hidden sm:rounded-lg">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-crusta-500 text-white">
+                                        <i class="fas fa-chart-line text-2xl"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Readings</h4>
+                                    <p class="mt-2 text-3xl leading-6 text-lynch-700">
+                                        {{ $totalReadings }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="flex w-full sm:max-w-sm mt-6 px-6 py-4 bg-white shadow overflow-hidden sm:rounded-lg">
-                            <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-crusta-500 text-white">
-                                    <i class="fas fa-chart-line text-2xl"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Readings</h4>
-                                <p class="mt-2 text-3xl leading-6 text-lynch-700">
-                                    {{ $totalReadings }}
-                                </p>
-                            </div>
+                        <div class="w-full md:w-1/2">
+                            <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+                            <canvas id="myChart" class="mt-6 md:mt-0 px-6 md:px-0"></canvas>
+                            <script>
+                                var ctx = document.getElementById('myChart').getContext('2d');
+                                var myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: @json($chartData['readingDates']),
+                                        datasets: [
+                                            {
+                                                label: 'Systolic',
+                                                fill: 'disabled',
+                                                borderColor: '#43AA8B',
+                                                data: @json($chartData['systolicReadings'])
+                                            },
+                                            {
+                                                label: 'Diastolic',
+                                                fill: 'disabled',
+                                                borderColor: '#F8961E',
+                                                data: @json($chartData['diastolicReadings'])
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        scales: {
+                                            xAxes: [{
+                                                gridLines: {
+                                                    drawOnChartArea: false
+                                                }
+                                            }],
+                                            yAxes: [{
+                                                gridLines: {
+                                                    drawOnChartArea: false
+                                                }
+                                            }]
+                                        },
+                                    }
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
 
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 lg:py-6">
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -76,7 +119,7 @@
                                         </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach ($readings as $reading)
+                                        @foreach ($recentReadings as $reading)
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-no-wrap">
                                                     <div class="text-sm leading-5 font-medium text-gray-900">
