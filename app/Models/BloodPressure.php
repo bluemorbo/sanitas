@@ -11,6 +11,7 @@ class BloodPressure extends Model
     use HasFactory;
 
     public $dates = ['reading_date'];
+    public $fillable = ['user_id', 'systolic', 'diastolic', 'heart_rate', 'reading_date', 'notes'];
 
     protected static function booted()
     {

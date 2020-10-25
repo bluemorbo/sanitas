@@ -6,6 +6,19 @@
     </x-slot>
 
     <div class="py-12">
+        @if(Session::has('success'))
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-chelsea-cucumber-400 rounded-lg text-chelsea-cucumber-900 px-4 py-3 mb-4" role="alert">
+                <div class="flex">
+                    <div>
+                        <p class="font-bold">Blood pressure reading saved</p>
+                        <p class="text-sm">If you feel the reading is abnormal, wait 5 minutes and take 2 more readings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
     @if($readings->count() > 0)
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-6 text-right">
