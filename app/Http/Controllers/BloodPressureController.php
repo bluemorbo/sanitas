@@ -11,12 +11,6 @@ class BloodPressureController extends Controller
     public function index()
     {
         $readings = BloodPressure::orderBy('reading_date', 'desc')
-            ->paginate(10)
-            ->each(function ($reading) {
-                $reading->category = (new BloodPressureInterpreter($reading))->categorise();
-            });
-
-        $readings = BloodPressure::orderBy('reading_date', 'desc')
             ->paginate(10);
 
         $readings->setCollection($readings->getCollection()->each(function ($reading) {
